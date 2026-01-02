@@ -1,0 +1,265 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, CheckCircle, Phone, MapPin, Clock, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const services = [
+  "Компьютерная диагностика",
+  "Ремонт двигателя",
+  "Ремонт подвески",
+  "Кузовной ремонт",
+  "Замена масел",
+  "Шиномонтаж",
+  "Электрика",
+  "Детейлинг",
+  "Другое"
+];
+
+const ContactForm = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    service: "",
+    message: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate form submission
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({ name: "", phone: "", service: "", message: "" });
+    }, 3000);
+  };
+
+  return (
+    <section id="contacts" className="section-padding relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+
+      <div className="container mx-auto relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
+            Свяжитесь с нами
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+            Оставьте <span className="text-gradient-gold">заявку</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Мы перезвоним в течение 15 минут и ответим на все ваши вопросы
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6"
+          >
+            <div className="card-glass">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-primary/10">
+                  <MapPin className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold mb-1">Адрес</h3>
+                  <p className="text-muted-foreground">
+                    г. Архангельск, ул. Мастеровая, д. 15
+                  </p>
+                  <p className="text-sm text-muted-foreground/70 mt-1">
+                    Рядом с ТЦ "Северный"
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="card-glass">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-primary/10">
+                  <Phone className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold mb-1">Телефон</h3>
+                  <a 
+                    href="tel:+78182123456" 
+                    className="text-primary hover:underline text-lg font-medium"
+                  >
+                    +7 (8182) 123-456
+                  </a>
+                  <p className="text-sm text-muted-foreground/70 mt-1">
+                    Звоните, будем рады помочь!
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="card-glass">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-primary/10">
+                  <Clock className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold mb-1">Режим работы</h3>
+                  <p className="text-muted-foreground">Ежедневно: 8:00 — 21:00</p>
+                  <p className="text-sm text-muted-foreground/70 mt-1">
+                    Без выходных и праздников
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="card-glass">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-primary/10">
+                  <Mail className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold mb-1">Email</h3>
+                  <a 
+                    href="mailto:info@avtomaster29.ru" 
+                    className="text-primary hover:underline"
+                  >
+                    info@avtomaster29.ru
+                  </a>
+                  <p className="text-sm text-muted-foreground/70 mt-1">
+                    Ответим в течение часа
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="glass-strong rounded-3xl p-8 relative overflow-hidden">
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-secondary/10 rounded-full blur-3xl" />
+
+              <AnimatePresence mode="wait">
+                {isSubmitted ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="text-center py-16 relative z-10"
+                  >
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-accent/20 flex items-center justify-center">
+                      <CheckCircle className="w-10 h-10 text-accent" />
+                    </div>
+                    <h3 className="font-display text-2xl font-bold mb-2">
+                      Заявка отправлена!
+                    </h3>
+                    <p className="text-muted-foreground">
+                      Мы перезвоним вам в течение 15 минут
+                    </p>
+                  </motion.div>
+                ) : (
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onSubmit={handleSubmit}
+                    className="space-y-6 relative z-10"
+                  >
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Ваше имя</label>
+                      <Input
+                        placeholder="Иван Петров"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="bg-white/5 border-white/10 focus:border-primary h-12"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Телефон</label>
+                      <Input
+                        type="tel"
+                        placeholder="+7 (___) ___-__-__"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="bg-white/5 border-white/10 focus:border-primary h-12"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Услуга</label>
+                      <Select
+                        value={formData.service}
+                        onValueChange={(value) => setFormData({ ...formData, service: value })}
+                      >
+                        <SelectTrigger className="bg-white/5 border-white/10 focus:border-primary h-12">
+                          <SelectValue placeholder="Выберите услугу" />
+                        </SelectTrigger>
+                        <SelectContent className="glass-strong border-white/10">
+                          {services.map((service) => (
+                            <SelectItem key={service} value={service}>
+                              {service}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">
+                        Опишите проблему
+                      </label>
+                      <Textarea
+                        placeholder="Укажите модель автомобиля и опишите проблему..."
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className="bg-white/5 border-white/10 focus:border-primary min-h-[120px] resize-none"
+                      />
+                    </div>
+
+                    <Button type="submit" className="btn-gold w-full">
+                      <Send className="w-4 h-4 mr-2" />
+                      Отправить заявку из Архангельска
+                    </Button>
+
+                    <p className="text-xs text-center text-muted-foreground">
+                      Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                    </p>
+                  </motion.form>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ContactForm;
