@@ -7,7 +7,8 @@ import {
   CircleDot,
   Sparkles,
   Wrench,
-  Battery
+  Battery,
+  ArrowRight
 } from "lucide-react";
 
 const services = [
@@ -63,12 +64,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="section-padding relative overflow-hidden">
-      {/* Background gear decoration */}
-      <div className="absolute -right-32 top-1/2 -translate-y-1/2 opacity-[0.03]">
-        <Cog className="w-[500px] h-[500px] animate-gear" />
-      </div>
-
+    <section id="services" className="section-padding bg-background relative overflow-hidden">
       <div className="container mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -77,11 +73,11 @@ const Services = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
+          <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-2 bg-primary/10 rounded-full">
             Что мы делаем
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-            Наши <span className="text-gradient-gold">услуги</span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            Наши <span className="text-gradient-primary">услуги</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Полный спектр услуг по обслуживанию и ремонту автомобилей 
@@ -98,17 +94,17 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="card-glass border-animated group cursor-pointer relative overflow-hidden"
+              className="bg-white rounded-2xl p-6 border border-border shadow-soft group cursor-pointer relative overflow-hidden"
             >
               {/* Hover gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="relative z-10">
-                <div className="p-4 rounded-2xl bg-primary/10 w-fit mb-4 group-hover:bg-primary/20 transition-colors duration-300">
-                  <service.icon className="w-8 h-8 neon-icon" />
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
+                  <service.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors duration-300" />
                 </div>
                 
-                <h3 className="font-display text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
+                <h3 className="font-display text-lg font-semibold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
                   {service.title}
                 </h3>
                 
@@ -116,10 +112,10 @@ const Services = () => {
                   {service.description}
                 </p>
                 
-                <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                  <span className="text-primary font-semibold">{service.price}</span>
-                  <span className="text-xs text-muted-foreground group-hover:text-primary/80 transition-colors">
-                    Подробнее →
+                <div className="flex items-center justify-between pt-4 border-t border-border">
+                  <span className="text-primary font-bold text-lg">{service.price}</span>
+                  <span className="flex items-center gap-1 text-xs text-muted-foreground group-hover:text-primary transition-colors">
+                    Подробнее <ArrowRight className="w-3 h-3" />
                   </span>
                 </div>
               </div>

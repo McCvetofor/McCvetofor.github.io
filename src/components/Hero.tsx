@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, Wrench, Shield, Clock } from "lucide-react";
+import { ChevronDown, Wrench, Shield, Clock, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -12,8 +12,8 @@ const Hero = () => {
   });
 
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   const scrollToServices = () => {
     const element = document.querySelector("#services");
@@ -26,77 +26,45 @@ const Hero = () => {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Hero Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
+      {/* Hero Background Image - only at top, fades on scroll */}
+      <motion.div 
+        style={{ opacity: bgOpacity }}
+        className="absolute inset-0"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
-      </div>
-
-      {/* Parallax Background Layers */}
-      <motion.div
-        style={{ y: y1 }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        {/* Abstract mechanical patterns - deep layer */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <svg className="w-full h-full" viewBox="0 0 1000 1000">
-            <circle cx="200" cy="300" r="150" stroke="currentColor" strokeWidth="1" fill="none" className="text-primary" />
-            <circle cx="800" cy="700" r="200" stroke="currentColor" strokeWidth="1" fill="none" className="text-primary" />
-            <path d="M100,500 Q500,200 900,500" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-primary/50" />
-          </svg>
-        </div>
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-background" />
       </motion.div>
-
-      <motion.div
-        style={{ y: y2 }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        {/* Floating gear elements - mid layer */}
-        <div className="absolute top-1/4 left-10 opacity-10">
-          <Wrench className="w-32 h-32 text-primary animate-float" />
-        </div>
-        <div className="absolute bottom-1/3 right-10 opacity-10">
-          <svg viewBox="0 0 100 100" className="w-40 h-40 animate-gear">
-            <circle cx="50" cy="50" r="30" stroke="currentColor" strokeWidth="2" fill="none" className="text-primary" />
-            <circle cx="50" cy="50" r="15" stroke="currentColor" strokeWidth="2" fill="none" className="text-primary" />
-            {[...Array(8)].map((_, i) => (
-              <rect
-                key={i}
-                x="45"
-                y="10"
-                width="10"
-                height="15"
-                fill="currentColor"
-                className="text-primary"
-                transform={`rotate(${i * 45} 50 50)`}
-              />
-            ))}
-          </svg>
-        </div>
-      </motion.div>
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background pointer-events-none" />
 
       {/* Main Content */}
       <motion.div
-        style={{ opacity }}
-        className="container mx-auto px-4 relative z-10"
+        style={{ opacity, y: y1 }}
+        className="container mx-auto px-4 relative z-10 pt-24"
       >
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
+          {/* Working hours badge - redesigned */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8"
+            className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm px-5 py-3 rounded-full mb-8 shadow-soft border border-border"
           >
-            <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span className="text-sm text-muted-foreground">Работаем ежедневно с 8:00 до 21:00</span>
+            <div className="flex items-center gap-2 text-primary">
+              <Clock className="w-4 h-4" />
+              <span className="font-semibold text-sm">8:00 — 21:00</span>
+            </div>
+            <div className="w-px h-4 bg-border" />
+            <span className="text-sm text-muted-foreground">без выходных</span>
+            <div className="w-px h-4 bg-border" />
+            <a href="tel:+78182123456" className="flex items-center gap-1 text-primary hover:underline">
+              <Phone className="w-3.5 h-3.5" />
+              <span className="text-sm font-medium">123-456</span>
+            </a>
           </motion.div>
 
           {/* Main Heading */}
@@ -104,10 +72,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white drop-shadow-lg"
           >
             Профессиональный автосервис в{" "}
-            <span className="text-gradient-gold glow-text">Архангельске</span>
+            <span className="text-primary">Архангельске</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -115,10 +83,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow"
           >
             Диагностика, ремонт и обслуживание — с гарантией качества 
-            для сурового климата <span className="text-foreground font-medium">Поморья</span>
+            для сурового климата <span className="font-semibold">Поморья</span>
           </motion.p>
 
           {/* CTA Buttons */}
@@ -129,14 +97,14 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
             <Button 
-              className="btn-gold text-base"
+              className="btn-primary text-base"
               onClick={() => document.querySelector("#contacts")?.scrollIntoView({ behavior: "smooth" })}
             >
               Рассчитать стоимость ремонта
             </Button>
             <Button 
               variant="outline"
-              className="btn-glass"
+              className="bg-white/90 backdrop-blur-sm border-white text-foreground hover:bg-white"
               onClick={scrollToServices}
             >
               Смотреть услуги
@@ -148,19 +116,19 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-3 gap-6 max-w-2xl mx-auto"
+            className="grid grid-cols-3 gap-4 max-w-lg mx-auto"
           >
             {[
               { icon: Clock, value: "15+", label: "лет опыта" },
-              { icon: Wrench, value: "10K+", label: "авто отремонтировано" },
-              { icon: Shield, value: "12", label: "месяцев гарантии" },
-            ].map((stat, index) => (
-              <div key={stat.label} className="text-center">
+              { icon: Wrench, value: "10K+", label: "авто" },
+              { icon: Shield, value: "12", label: "мес. гарантии" },
+            ].map((stat) => (
+              <div key={stat.label} className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-soft border border-white/50">
                 <stat.icon className="w-5 h-5 mx-auto mb-2 text-primary" />
-                <div className="font-display text-2xl md:text-3xl font-bold text-gradient-gold">
+                <div className="font-display text-2xl md:text-3xl font-bold text-primary">
                   {stat.value}
                 </div>
-                <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-xs text-muted-foreground">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -180,8 +148,10 @@ const Hero = () => {
           className="flex flex-col items-center gap-2 cursor-pointer"
           onClick={scrollToServices}
         >
-          <span className="text-xs text-muted-foreground">Листайте вниз</span>
-          <ChevronDown className="w-5 h-5 text-primary" />
+          <span className="text-xs text-white/80 drop-shadow">Листайте вниз</span>
+          <div className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-soft">
+            <ChevronDown className="w-4 h-4 text-primary" />
+          </div>
         </motion.div>
       </motion.div>
     </section>

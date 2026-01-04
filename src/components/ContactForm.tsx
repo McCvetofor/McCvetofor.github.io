@@ -35,7 +35,6 @@ const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
@@ -44,10 +43,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contacts" className="section-padding relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-
+    <section id="contacts" className="section-padding bg-gradient-to-b from-background to-muted relative overflow-hidden">
       <div className="container mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,11 +52,11 @@ const ContactForm = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
+          <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-2 bg-primary/10 rounded-full">
             Свяжитесь с нами
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-            Оставьте <span className="text-gradient-gold">заявку</span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            Оставьте <span className="text-gradient-primary">заявку</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Мы перезвоним в течение 15 минут и ответим на все ваши вопросы
@@ -74,79 +70,60 @@ const ContactForm = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-5"
           >
-            <div className="card-glass">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-primary/10">
-                  <MapPin className="w-6 h-6 text-primary" />
+            {[
+              {
+                icon: MapPin,
+                title: "Адрес",
+                main: "г. Архангельск, ул. Мастеровая, д. 15",
+                sub: "Рядом с ТЦ \"Северный\""
+              },
+              {
+                icon: Phone,
+                title: "Телефон",
+                main: "+7 (8182) 123-456",
+                sub: "Звоните, будем рады помочь!",
+                href: "tel:+78182123456"
+              },
+              {
+                icon: Clock,
+                title: "Режим работы",
+                main: "Ежедневно: 8:00 — 21:00",
+                sub: "Без выходных и праздников"
+              },
+              {
+                icon: Mail,
+                title: "Email",
+                main: "info@avtomaster29.ru",
+                sub: "Ответим в течение часа",
+                href: "mailto:info@avtomaster29.ru"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-xl p-5 border border-border shadow-soft flex items-start gap-4"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <item.icon className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg font-semibold mb-1">Адрес</h3>
-                  <p className="text-muted-foreground">
-                    г. Архангельск, ул. Мастеровая, д. 15
-                  </p>
-                  <p className="text-sm text-muted-foreground/70 mt-1">
-                    Рядом с ТЦ "Северный"
-                  </p>
+                  <h3 className="font-display text-lg font-semibold mb-1 text-foreground">{item.title}</h3>
+                  {item.href ? (
+                    <a href={item.href} className="text-primary hover:underline font-medium">
+                      {item.main}
+                    </a>
+                  ) : (
+                    <p className="text-foreground font-medium">{item.main}</p>
+                  )}
+                  <p className="text-sm text-muted-foreground mt-1">{item.sub}</p>
                 </div>
-              </div>
-            </div>
-
-            <div className="card-glass">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-primary/10">
-                  <Phone className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-display text-lg font-semibold mb-1">Телефон</h3>
-                  <a 
-                    href="tel:+78182123456" 
-                    className="text-primary hover:underline text-lg font-medium"
-                  >
-                    +7 (8182) 123-456
-                  </a>
-                  <p className="text-sm text-muted-foreground/70 mt-1">
-                    Звоните, будем рады помочь!
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card-glass">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-primary/10">
-                  <Clock className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-display text-lg font-semibold mb-1">Режим работы</h3>
-                  <p className="text-muted-foreground">Ежедневно: 8:00 — 21:00</p>
-                  <p className="text-sm text-muted-foreground/70 mt-1">
-                    Без выходных и праздников
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card-glass">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-primary/10">
-                  <Mail className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-display text-lg font-semibold mb-1">Email</h3>
-                  <a 
-                    href="mailto:info@avtomaster29.ru" 
-                    className="text-primary hover:underline"
-                  >
-                    info@avtomaster29.ru
-                  </a>
-                  <p className="text-sm text-muted-foreground/70 mt-1">
-                    Ответим в течение часа
-                  </p>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Form */}
@@ -156,10 +133,9 @@ const ContactForm = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="glass-strong rounded-3xl p-8 relative overflow-hidden">
-              {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-secondary/10 rounded-full blur-3xl" />
+            <div className="bg-white rounded-2xl p-8 border border-border shadow-card relative overflow-hidden">
+              {/* Accent line */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary" />
 
               <AnimatePresence mode="wait">
                 {isSubmitted ? (
@@ -170,10 +146,10 @@ const ContactForm = () => {
                     exit={{ opacity: 0, scale: 0.9 }}
                     className="text-center py-16 relative z-10"
                   >
-                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-accent/20 flex items-center justify-center">
-                      <CheckCircle className="w-10 h-10 text-accent" />
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
+                      <CheckCircle className="w-10 h-10 text-green-600" />
                     </div>
-                    <h3 className="font-display text-2xl font-bold mb-2">
+                    <h3 className="font-display text-2xl font-bold mb-2 text-foreground">
                       Заявка отправлена!
                     </h3>
                     <p className="text-muted-foreground">
@@ -187,41 +163,41 @@ const ContactForm = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onSubmit={handleSubmit}
-                    className="space-y-6 relative z-10"
+                    className="space-y-5 relative z-10"
                   >
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Ваше имя</label>
+                      <label className="text-sm font-medium mb-2 block text-foreground">Ваше имя</label>
                       <Input
                         placeholder="Иван Петров"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="bg-white/5 border-white/10 focus:border-primary h-12"
+                        className="bg-muted border-border focus:border-primary h-12"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Телефон</label>
+                      <label className="text-sm font-medium mb-2 block text-foreground">Телефон</label>
                       <Input
                         type="tel"
                         placeholder="+7 (___) ___-__-__"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="bg-white/5 border-white/10 focus:border-primary h-12"
+                        className="bg-muted border-border focus:border-primary h-12"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Услуга</label>
+                      <label className="text-sm font-medium mb-2 block text-foreground">Услуга</label>
                       <Select
                         value={formData.service}
                         onValueChange={(value) => setFormData({ ...formData, service: value })}
                       >
-                        <SelectTrigger className="bg-white/5 border-white/10 focus:border-primary h-12">
+                        <SelectTrigger className="bg-muted border-border focus:border-primary h-12">
                           <SelectValue placeholder="Выберите услугу" />
                         </SelectTrigger>
-                        <SelectContent className="glass-strong border-white/10">
+                        <SelectContent className="bg-white border-border">
                           {services.map((service) => (
                             <SelectItem key={service} value={service}>
                               {service}
@@ -232,20 +208,20 @@ const ContactForm = () => {
                     </div>
 
                     <div>
-                      <label className="text-sm font-medium mb-2 block">
+                      <label className="text-sm font-medium mb-2 block text-foreground">
                         Опишите проблему
                       </label>
                       <Textarea
                         placeholder="Укажите модель автомобиля и опишите проблему..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="bg-white/5 border-white/10 focus:border-primary min-h-[120px] resize-none"
+                        className="bg-muted border-border focus:border-primary min-h-[120px] resize-none"
                       />
                     </div>
 
-                    <Button type="submit" className="btn-gold w-full">
+                    <Button type="submit" className="btn-primary w-full">
                       <Send className="w-4 h-4 mr-2" />
-                      Отправить заявку из Архангельска
+                      Отправить заявку
                     </Button>
 
                     <p className="text-xs text-center text-muted-foreground">
