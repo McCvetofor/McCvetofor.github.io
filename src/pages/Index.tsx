@@ -31,9 +31,7 @@ const Index = () => {
           <ContactForm />
         </section>
       </main>
-      <section className="snap-start">
-        <Footer />
-      </section>
+      <Footer />
     </div>
   );
 };
