@@ -37,8 +37,8 @@ const Hero = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-background" />
+        {/* Uniform gray overlay for text readability */}
+        <div className="absolute inset-0 bg-gray-900/60" />
       </motion.div>
 
       {/* Main Content */}
@@ -74,9 +74,6 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-8"
           >
-            <div className="inline-block bg-primary/20 backdrop-blur-sm px-4 py-1 rounded-full mb-4 border border-primary/30">
-              <span className="text-primary font-medium text-sm tracking-widest uppercase">29 регион</span>
-            </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-none tracking-tight">
               <span className="text-white drop-shadow-lg block">Профессиональный</span>
               <span className="relative inline-block mt-2">
