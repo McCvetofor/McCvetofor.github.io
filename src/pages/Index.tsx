@@ -9,27 +9,15 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden snap-y snap-mandatory h-screen overflow-y-auto scroll-smooth">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden scroll-smooth">
       <Header />
       <main>
-        <section className="snap-start">
-          <Hero />
-        </section>
-        <section className="snap-start">
-          <Advantages />
-        </section>
-        <section className="snap-start">
-          <Services />
-        </section>
-        <section className="snap-start">
-          <Guarantees />
-        </section>
-        <section className="snap-start">
-          <About />
-        </section>
-        <section>
-          <ContactForm />
-        </section>
+        <Hero />
+        <Advantages />
+        <Services />
+        <Guarantees />
+        <About />
+        <ContactForm />
       </main>
       <Footer />
     </div>

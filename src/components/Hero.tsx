@@ -148,25 +148,6 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="flex flex-col items-center gap-2 cursor-pointer"
-          onClick={scrollToServices}
-        >
-          <span className="text-xs text-white/80 drop-shadow">Листайте вниз</span>
-          <div className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-soft">
-            <ChevronDown className="w-4 h-4 text-primary" />
-          </div>
-        </motion.div>
-      </motion.div>
     </section>
   );
 };
