@@ -27,7 +27,7 @@ const Index = () => {
         <section className="snap-start">
           <About />
         </section>
-        <section className="snap-start">
+        <section>
           <ContactForm />
         </section>
       </main>
