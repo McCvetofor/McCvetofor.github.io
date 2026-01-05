@@ -68,15 +68,31 @@ const Hero = () => {
           </motion.div>
 
           {/* Main Heading */}
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white drop-shadow-lg"
+            className="mb-8"
           >
-            Профессиональный автосервис в{" "}
-            <span className="text-primary">Архангельске</span>
-          </motion.h1>
+            <div className="inline-block bg-primary/20 backdrop-blur-sm px-4 py-1 rounded-full mb-4 border border-primary/30">
+              <span className="text-primary font-medium text-sm tracking-widest uppercase">29 регион</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-none tracking-tight">
+              <span className="text-white drop-shadow-lg block">Профессиональный</span>
+              <span className="relative inline-block mt-2">
+                <span className="bg-gradient-to-r from-primary via-sky-400 to-primary bg-clip-text text-transparent">
+                  автосервис
+                </span>
+              </span>
+            </h1>
+            <div className="flex items-center justify-center gap-3 mt-4">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-white/50" />
+              <span className="text-white/90 text-xl md:text-2xl font-light tracking-wide">
+                в Архангельске
+              </span>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-white/50" />
+            </div>
+          </motion.div>
 
           {/* Subtitle */}
           <motion.p
